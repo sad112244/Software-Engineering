@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Book Reviews</title>
+  <link rel="stylesheet" href="/styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/reviews" class="nav-brand">📚 BookReviews</a>
+      <div class="nav-links">
+        <a href="/reviews" class="nav-link">Home</a>
+        <a href="/logout" class="logout-btn">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <section class="new-review">
+      <h2 class="section-title">Share Your Review</h2>
+      <form action="/reviews/new" method="POST">
+        <div class="form-group">
+          <label>Book Title</label>
+          <input type="text" name="bookTitle" required placeholder="Enter the book title">
+        </div>
+        <div class="form-group">
+          <label>Your Review</label>
+          <textarea name="reviewText" required placeholder="Share your thoughts about the book..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Rating</label>
+          <input type="number" name="rating" min="1" max="5" required placeholder="Rate from 1 to 5">
+        </div>
+        <button type="submit">Post Review</button>
+      </form>
+    </section>
+
+    <section class="reviews-list">
+      <h2 class="section-title">Recent Reviews</h2>
+      <% if (reviews.length === 0) { %>
+        <div class="review-card">
+          <p>No reviews yet! Be the first to share your thoughts.</p>
+        </div>
+      <% } else { %>
+        <% reviews.forEach(review => { %>
+          <div class="review-card">
+            <h3><%= review.book_title %></h3>
+            <div class="rating"><%= '⭐'.repeat(review.rating) %></div>
+            <p><%= review.review_text %></p>
+            <div class="review-meta">
+              Posted by <%= review.username %> on <%= new Date(review.created_at).toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+              }) %>
+            </div>
+          </div>
+        <% }) %>
+      <% } %>
+    </section>
+  </div>
+</body>
+</html>

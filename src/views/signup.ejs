@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign Up - Book Reviews</title>
+  <link rel="stylesheet" href="/styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-brand">📚 BookReviews</a>
+      <div class="nav-links">
+        <a href="/" class="nav-link">Login</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="auth-container">
+    <h1 class="auth-title">Create Account</h1>
+    <% if (locals.error) { %>
+      <div class="error"><%= error %></div>
+    <% } %>
+    <form action="/signup" method="POST">
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" name="username" required placeholder="Choose a username">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" name="password" required placeholder="Choose a password">
+      </div>
+      <button type="submit">Create Account</button>
+    </form>
+    <a href="/" class="auth-link">Already have an account? Sign in</a>
+  </div>
+</body>
+</html>
